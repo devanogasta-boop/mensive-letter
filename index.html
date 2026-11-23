@@ -61,20 +61,28 @@
             background: #fff0f5;
             border: 3px dashed #e99ab5;
             border-radius: 25px;
-            height: 350px;
+            height: 380px;
             position: relative;
             overflow: hidden;
             margin-top: 20px;
         }
 
+        /* TEDDY IMAGE */
+
         #teddy {
-            font-size: 75px;
             position: absolute;
-            bottom: 5px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
+            height: 170px;
+            width: auto;
+            max-width: 70%;
+            object-fit: contain;
             z-index: 1;
+            pointer-events: none;
         }
+
+        /* LOVE LETTERS */
 
         .letter {
             position: absolute;
@@ -105,6 +113,7 @@
             font-size: 22px;
             font-weight: bold;
         }
+
     </style>
 </head>
 
@@ -141,7 +150,12 @@
 
         <div id="gameArea">
 
-            <div id="teddy">🧸</div>
+            <!-- Teddy picture -->
+            <img
+                id="teddy"
+                src="teddy-catching.png"
+                alt="Teddy catching love letters"
+            >
 
         </div>
 
@@ -156,7 +170,13 @@
 
         <p>All the letters have been collected!</p>
 
-        <div style="font-size: 80px;">🧸💌</div>
+        <div style="margin: 15px 0;">
+            <img
+                src="teddy-catching.png"
+                alt="Happy Teddy"
+                style="width: 180px; max-width: 100%;"
+            >
+        </div>
 
         <h2>Good job!</h2>
 
@@ -202,7 +222,7 @@
         });
 
 
-        // CREATE LETTERS
+        // CREATE 5 LETTERS
 
         function createLetters() {
 
@@ -222,10 +242,10 @@
 
                 letter.style.left = Math.random() * 80 + "%";
 
-                letter.style.top = Math.random() * 70 + "%";
+                letter.style.top = Math.random() * 65 + "%";
 
 
-                // WHEN LETTER IS CLICKED
+                // CLICK LETTER
 
                 letter.addEventListener("click", function() {
 
@@ -235,7 +255,7 @@
 
                     updateScore();
 
-                    if (collected >= 5) {
+                    if (collected === 5) {
                         finishGame();
                     }
 
@@ -268,7 +288,7 @@
         }
 
 
-        // RESTART GAME
+        // RESTART
 
         restartButton.addEventListener("click", function() {
 
