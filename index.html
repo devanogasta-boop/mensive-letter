@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Mensive Letter</title>
+    <title>Mensive Letter ♡</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
         body {
@@ -11,22 +11,25 @@
             font-family: Arial, sans-serif;
             text-align: center;
             color: #b85c7a;
+            margin: 0;
+            padding: 20px;
         }
 
         h1 {
             color: #d96f94;
-            font-size: 40px;
+            font-size: 30px;
         }
 
         .card {
             background: #fff8f5;
-            width: 80%;
+            width: 90%;
             max-width: 400px;
-            margin: 40px auto;
-            padding: 30px;
+            margin: 30px auto;
+            padding: 25px;
             border-radius: 30px;
             border: 4px solid white;
             box-shadow: 0 8px 20px #e8a8bd;
+            box-sizing: border-box;
         }
 
         h2 {
@@ -37,23 +40,69 @@
             background: #e99ab5;
             color: white;
             border: 3px solid white;
-            padding: 15px 30px;
+            padding: 14px 25px;
             border-radius: 30px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
         }
-    </style>
 
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #gameArea {
+            background: #fff0f5;
+            border: 3px dashed #e99ab5;
+            border-radius: 25px;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        #teddy {
+            font-size: 75px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .letter {
+            position: absolute;
+            font-size: 38px;
+            border: none;
+            background: transparent;
+            padding: 0;
+            animation: float 2s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(-8deg); }
+            50% { transform: translateY(-12px) rotate(8deg); }
+            100% { transform: translateY(0px) rotate(-8deg); }
+        }
+
+        #score {
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Catch the Love Letters! ♡</h1>
+    <!-- OPENING -->
+    <div class="card" id="opening">
 
-    <p>Help Teddy collect all the love letters!</p>
+        <h1>Catch the Love Letters! ♡</h1>
 
-    <div class="card">
+        <p>Help Teddy collect all the love letters!</p>
 
         <h2>Oh no! 💌</h2>
 
@@ -61,10 +110,135 @@
 
         <p>Help Teddy catch them!</p>
 
-        <button>START GAME ♡</button>
+        <button onclick="startGame()">START GAME ♡</button>
 
     </div>
 
-</body>
 
+    <!-- GAME -->
+    <div class="card hidden" id="gameScreen">
+
+        <h1>Catch the Letters! 💌</h1>
+
+        <p>Tap the letters to help Teddy!</p>
+
+        <p id="score">Letters: 0 / 5</p>
+
+        <div id="gameArea">
+
+            <div id="teddy">🧸</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FINISH -->
+    <div class="card hidden" id="finishScreen">
+
+        <h1>You did it! ♡</h1>
+
+        <p>All the letters have been collected!</p>
+
+        <div style="font-size: 80px;">🧸💌</div>
+
+        <h2>Good job!</h2>
+
+        <p>You helped Teddy collect all 5 letters!</p>
+
+        <button onclick="restartGame()">PLAY AGAIN ♡</button>
+
+    </div>
+
+
+    <script>
+
+        let collected = 0;
+
+        function startGame() {
+
+            document.getElementById("opening").classList.add("hidden");
+
+            document.getElementById("gameScreen").classList.remove("hidden");
+
+            collected = 0;
+
+            updateScore();
+
+            createLetters();
+
+        }
+
+
+        function createLetters() {
+
+            const gameArea = document.getElementById("gameArea");
+
+            // Hapus surat lama
+            document.querySelectorAll(".letter").forEach(letter => {
+                letter.remove();
+            });
+
+            // Buat 5 surat
+            for (let i = 0; i < 5; i++) {
+
+                const letter = document.createElement("button");
+
+                letter.innerHTML = "💌";
+
+                letter.className = "letter";
+
+                letter.style.left = Math.random() * 75 + "%";
+
+                letter.style.top = Math.random() * 65 + "%";
+
+                letter.onclick = function() {
+
+                    letter.remove();
+
+                    collected++;
+
+                    updateScore();
+
+                    if (collected === 5) {
+                        finishGame();
+                    }
+
+                };
+
+                gameArea.appendChild(letter);
+
+            }
+
+        }
+
+
+        function updateScore() {
+
+            document.getElementById("score").innerHTML =
+                "Letters: " + collected + " / 5";
+
+        }
+
+
+        function finishGame() {
+
+            document.getElementById("gameScreen").classList.add("hidden");
+
+            document.getElementById("finishScreen").classList.remove("hidden");
+
+        }
+
+
+        function restartGame() {
+
+            document.getElementById("finishScreen").classList.add("hidden");
+
+            document.getElementById("opening").classList.remove("hidden");
+
+        }
+
+    </script>
+
+</body>
 </html>
