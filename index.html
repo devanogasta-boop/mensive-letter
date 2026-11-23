@@ -1,315 +1,630 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mensive Letter ♡</title>
+<title>A Little Love Letter ♡</title>
 
-    <style>
-        body {
-            background: #ffe4ec;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: #b85c7a;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        h1 {
-            color: #d96f94;
-            font-size: 30px;
-        }
+body {
+    margin: 0;
+    padding: 18px;
+    background: #ffe4ec;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #b85c7a;
+}
 
-        .card {
-            background: #fff8f5;
-            width: 90%;
-            max-width: 400px;
-            margin: 30px auto;
-            padding: 25px;
-            border-radius: 30px;
-            border: 4px solid white;
-            box-shadow: 0 8px 20px #e8a8bd;
-            box-sizing: border-box;
-        }
+h1 {
+    color: #d96f94;
+    font-size: 28px;
+}
 
-        h2 {
-            color: #d96f94;
-        }
+h2 {
+    color: #d96f94;
+}
 
-        button {
-            background: #e99ab5;
-            color: white;
-            border: 3px solid white;
-            padding: 14px 25px;
-            border-radius: 30px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
+p {
+    line-height: 1.8;
+}
 
-        button:active {
-            transform: scale(0.95);
-        }
+.card {
+    width: 94%;
+    max-width: 440px;
+    margin: 25px auto;
+    padding: 25px;
+    background: #fff8f5;
+    border: 4px solid white;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px #e8a8bd;
+}
 
-        .hidden {
-            display: none !important;
-        }
+.hidden {
+    display: none !important;
+}
 
-        #gameArea {
-            background: #fff0f5;
-            border: 3px dashed #e99ab5;
-            border-radius: 25px;
-            height: 380px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 20px;
-        }
+/* BUTTONS */
 
-        /* TEDDY SAAT BERMAIN */
+button {
+    background: #e99ab5;
+    color: white;
+    border: 3px solid white;
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 8px;
+    cursor: pointer;
+}
 
-        #teddy {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 170px;
-            width: auto;
-            max-width: 70%;
-            object-fit: contain;
-            z-index: 1;
-            pointer-events: none;
-        }
+button:active {
+    transform: scale(0.95);
+}
 
-        /* SURAT */
+/* GAME */
 
-        .letter {
-            position: absolute;
-            font-size: 38px;
-            background: transparent;
-            border: none;
-            padding: 0;
-            margin: 0;
-            animation: float 2s infinite ease-in-out;
-            z-index: 2;
-        }
+#gameArea {
+    background: #fff0f5;
+    border: 3px dashed #e99ab5;
+    border-radius: 25px;
+    height: 380px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
 
-        @keyframes float {
-            0% {
-                transform: translateY(0px) rotate(-8deg);
-            }
+#teddyGame {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 170px;
+    max-width: 75%;
+    width: auto;
+    object-fit: contain;
+    pointer-events: none;
+}
 
-            50% {
-                transform: translateY(-12px) rotate(8deg);
-            }
+.letter {
+    position: absolute;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 38px;
+    z-index: 2;
+    animation: float 2s infinite ease-in-out;
+}
 
-            100% {
-                transform: translateY(0px) rotate(-8deg);
-            }
-        }
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(-8deg);
+    }
 
-        #score {
-            font-size: 22px;
-            font-weight: bold;
-        }
+    50% {
+        transform: translateY(-12px) rotate(8deg);
+    }
 
-        /* TEDDY SAAT FINISH */
+    100% {
+        transform: translateY(0) rotate(-8deg);
+    }
+}
 
-        #finishTeddy {
-            width: 230px;
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 15px auto;
-        }
+#score {
+    font-size: 21px;
+    font-weight: bold;
+}
 
-    </style>
+/* TEDDY PICTURES */
+
+.teddyPicture {
+    display: block;
+    width: 240px;
+    max-width: 90%;
+    height: auto;
+    margin: 20px auto;
+}
+
+/* TEDDY DIALOGUE */
+
+.dialogue {
+    background: #fff0f5;
+    border: 2px dashed #edb1c5;
+    border-radius: 22px;
+    padding: 18px;
+    margin: 20px 0;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+/* LETTER */
+
+#letterScreen {
+    max-width: 600px;
+}
+
+.paper {
+    background: #fffdf8;
+    border: 2px solid #f3d6df;
+    border-radius: 15px;
+    padding: 24px;
+    text-align: left;
+    box-shadow: 0 4px 12px #efd5df;
+}
+
+.paper h1 {
+    text-align: center;
+}
+
+.paper p {
+    line-height: 1.9;
+    font-size: 16px;
+    color: #916579;
+    white-space: pre-line;
+}
+
+.date {
+    text-align: center;
+    font-size: 13px;
+    color: #c78aa2;
+}
+
+.signature {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.footer {
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+.heart {
+    color: #e98aab;
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- OPENING -->
 
-    <div class="card" id="opening">
+<!-- ========================== -->
+<!-- 1. OPENING -->
+<!-- ========================== -->
 
-        <h1>Catch the Love Letters! ♡</h1>
+<div class="card" id="opening">
 
-        <p>Help Teddy collect all the love letters!</p>
+    <h1>Catch the Love Letters! ♡</h1>
 
-        <h2>Oh no! 💌</h2>
+    <p>Help Teddy collect all the love letters!</p>
 
-        <p>The love letters are falling everywhere!</p>
+    <h2>Oh no! 💌</h2>
 
-        <p>Help Teddy catch them!</p>
+    <p>The love letters are falling everywhere!</p>
 
-        <button id="startButton">START GAME ♡</button>
+    <p>Help Teddy catch them!</p>
+
+    <button onclick="startGame()">
+        START GAME ♡
+    </button>
+
+</div>
+
+
+<!-- ========================== -->
+<!-- 2. GAME -->
+<!-- ========================== -->
+
+<div class="card hidden" id="gameScreen">
+
+    <h1>Catch the Letters! 💌</h1>
+
+    <p>Tap all the letters to help Teddy!</p>
+
+    <p id="score">Letters: 0 / 5</p>
+
+    <div id="gameArea">
+
+        <img
+            id="teddyGame"
+            src="teddy-catching.png"
+            alt="Teddy catching letters"
+        >
 
     </div>
 
+</div>
 
-    <!-- GAME SCREEN -->
 
-    <div class="card hidden" id="gameScreen">
+<!-- ========================== -->
+<!-- 3. GAME FINISH -->
+<!-- ========================== -->
 
-        <h1>Catch the Letters! 💌</h1>
+<div class="card hidden" id="finishScreen">
 
-        <p>Tap the letters to help Teddy!</p>
+    <h1>You did it! ♡</h1>
 
-        <p id="score">Letters: 0 / 5</p>
+    <p>All the letters have been collected!</p>
 
-        <div id="gameArea">
+    <img
+        class="teddyPicture"
+        src="teddy-finish.png"
+        alt="Teddy holding a letter"
+    >
 
-            <img
-                id="teddy"
-                src="teddy-catching.png"
-                alt="Teddy catching love letters"
-            >
+    <h2>Good job!</h2>
+
+    <p>You helped Teddy collect all 5 letters!</p>
+
+    <button onclick="goToStory()">
+        CONTINUE ♡
+    </button>
+
+</div>
+
+
+<!-- ========================== -->
+<!-- 4. TEDDY TALKING -->
+<!-- ========================== -->
+
+<div class="card hidden" id="storyScreen">
+
+    <h1>A Little Surprise ♡</h1>
+
+    <img
+        class="teddyPicture"
+        src="teddy-finish.png"
+        alt="Teddy holding an envelope"
+    >
+
+    <div class="dialogue">
+
+        <p>
+            Psst... hey, you! ♡
+        </p>
+
+        <p>
+            I have something for you!
+        </p>
+
+        <p>
+            Someone sent you a little surprise.
+            I think you'll love it!
+        </p>
+
+    </div>
+
+    <button onclick="goToOpen()">
+        CLICK CLICK ♡
+    </button>
+
+</div>
+
+
+<!-- ========================== -->
+<!-- 5. TEDDY OPENING LETTER -->
+<!-- ========================== -->
+
+<div class="card hidden" id="openScreen">
+
+    <h1>What's Inside? 💌</h1>
+
+    <img
+        class="teddyPicture"
+        src="teddy-open.png"
+        alt="Teddy opening an envelope"
+    >
+
+    <div class="dialogue">
+
+        <p>
+            Ooh! Let's see what's inside...
+        </p>
+
+        <p>
+            Wait... I think there's something special here!
+        </p>
+
+    </div>
+
+    <button onclick="goToReading()">
+        NEXT ♡
+    </button>
+
+</div>
+
+
+<!-- ========================== -->
+<!-- 6. TEDDY READING -->
+<!-- ========================== -->
+
+<div class="card hidden" id="readingScreen">
+
+    <h1>A Letter Just for You ♡</h1>
+
+    <img
+        class="teddyPicture"
+        src="teddy-reading.png"
+        alt="Teddy reading a letter"
+    >
+
+    <div class="dialogue">
+
+        <p>
+            Oh my! This letter is especially for you!
+        </p>
+
+        <p>
+            I think you should read it yourself.
+        </p>
+
+        <p>
+            Take your time... it's something special. ♡
+        </p>
+
+    </div>
+
+    <button onclick="openLetter()">
+        READ MY LETTER 💌
+    </button>
+
+</div>
+
+
+<!-- ========================== -->
+<!-- 7. LONG LETTER -->
+<!-- ========================== -->
+
+<div class="card hidden" id="letterScreen">
+
+    <div class="paper">
+
+        <h1>A Letter for You ♡</h1>
+
+        <p class="date">
+            A little something made with love.
+        </p>
+
+        <hr style="border: 1px dashed #edb1c5;">
+
+        <!-- EDIT YOUR MESSAGE HERE -->
+
+        <p>Dear [Name],</p>
+
+        <p>
+            [Write your mensive message here.
+
+            Replace this paragraph with your own words.
+            You can write as long as you want.]
+        </p>
+
+        <p>
+            [Write another paragraph here.
+            You can include your memories, wishes,
+            appreciation, and sweet messages.]
+        </p>
+
+        <p>
+            [Write your final paragraph here.]
+        </p>
+
+        <div class="signature">
+
+            <p>With love, ♡</p>
+
+            <p>[Your Name]</p>
 
         </div>
 
     </div>
 
+    <p class="footer">
+        Made with love and a little Teddy magic 🧸💌
+    </p>
 
-    <!-- FINISH SCREEN -->
+    <button onclick="restartWebsite()">
+        PLAY AGAIN ♡
+    </button>
 
-    <div class="card hidden" id="finishScreen">
-
-        <h1>You did it! ♡</h1>
-
-        <p>All the letters have been collected!</p>
-
-        <img
-            id="finishTeddy"
-            src="teddy-finish.png"
-            alt="Teddy holding a love letter"
-        >
-
-        <h2>Good job!</h2>
-
-        <p>You helped Teddy collect all 5 letters!</p>
-
-        <button id="restartButton">PLAY AGAIN ♡</button>
-
-    </div>
+</div>
 
 
-    <!-- JAVASCRIPT -->
+<!-- ========================== -->
+<!-- JAVASCRIPT -->
+<!-- ========================== -->
 
-    <script>
+<script>
 
-        let collected = 0;
-
-        const opening = document.getElementById("opening");
-        const gameScreen = document.getElementById("gameScreen");
-        const finishScreen = document.getElementById("finishScreen");
-        const gameArea = document.getElementById("gameArea");
-        const score = document.getElementById("score");
-
-        const startButton = document.getElementById("startButton");
-        const restartButton = document.getElementById("restartButton");
+let collected = 0;
 
 
-        // START GAME
+// GET SCREENS
 
-        startButton.addEventListener("click", function() {
+const opening = document.getElementById("opening");
+const gameScreen = document.getElementById("gameScreen");
+const finishScreen = document.getElementById("finishScreen");
+const storyScreen = document.getElementById("storyScreen");
+const openScreen = document.getElementById("openScreen");
+const readingScreen = document.getElementById("readingScreen");
+const letterScreen = document.getElementById("letterScreen");
 
-            opening.classList.add("hidden");
+const gameArea = document.getElementById("gameArea");
+const score = document.getElementById("score");
 
-            finishScreen.classList.add("hidden");
 
-            gameScreen.classList.remove("hidden");
+// HIDE ALL SCREENS
 
-            collected = 0;
+function hideAllScreens() {
+
+    opening.classList.add("hidden");
+    gameScreen.classList.add("hidden");
+    finishScreen.classList.add("hidden");
+    storyScreen.classList.add("hidden");
+    openScreen.classList.add("hidden");
+    readingScreen.classList.add("hidden");
+    letterScreen.classList.add("hidden");
+
+}
+
+
+// START GAME
+
+function startGame() {
+
+    hideAllScreens();
+
+    gameScreen.classList.remove("hidden");
+
+    collected = 0;
+
+    updateScore();
+
+    createLetters();
+
+}
+
+
+// CREATE 5 LETTERS
+
+function createLetters() {
+
+    document.querySelectorAll(".letter").forEach(function(letter) {
+        letter.remove();
+    });
+
+    for (let i = 0; i < 5; i++) {
+
+        const letter = document.createElement("button");
+
+        letter.innerHTML = "💌";
+
+        letter.className = "letter";
+
+        letter.setAttribute("aria-label", "Collect letter");
+
+        letter.style.left = Math.random() * 80 + "%";
+
+        letter.style.top = Math.random() * 65 + "%";
+
+
+        // CLICK LETTER
+
+        letter.addEventListener("click", function() {
+
+            letter.remove();
+
+            collected++;
 
             updateScore();
 
-            createLetters();
-
-        });
-
-
-        // CREATE LETTERS
-
-        function createLetters() {
-
-            document.querySelectorAll(".letter").forEach(function(letter) {
-                letter.remove();
-            });
-
-            for (let i = 0; i < 5; i++) {
-
-                const letter = document.createElement("button");
-
-                letter.innerHTML = "💌";
-
-                letter.className = "letter";
-
-                letter.setAttribute("aria-label", "Collect letter");
-
-                letter.style.left = Math.random() * 80 + "%";
-
-                letter.style.top = Math.random() * 65 + "%";
-
-
-                // WHEN LETTER IS CLICKED
-
-                letter.addEventListener("click", function() {
-
-                    letter.remove();
-
-                    collected++;
-
-                    updateScore();
-
-                    if (collected === 5) {
-                        finishGame();
-                    }
-
-                });
-
-                gameArea.appendChild(letter);
-
+            if (collected === 5) {
+                finishGame();
             }
 
-        }
-
-
-        // UPDATE SCORE
-
-        function updateScore() {
-
-            score.textContent = "Letters: " + collected + " / 5";
-
-        }
-
-
-        // FINISH GAME
-
-        function finishGame() {
-
-            gameScreen.classList.add("hidden");
-
-            finishScreen.classList.remove("hidden");
-
-        }
-
-
-        // PLAY AGAIN
-
-        restartButton.addEventListener("click", function() {
-
-            finishScreen.classList.add("hidden");
-
-            opening.classList.remove("hidden");
-
-            collected = 0;
-
-            updateScore();
-
         });
 
-    </script>
+        gameArea.appendChild(letter);
+
+    }
+
+}
+
+
+// UPDATE SCORE
+
+function updateScore() {
+
+    score.textContent = "Letters: " + collected + " / 5";
+
+}
+
+
+// FINISH GAME
+
+function finishGame() {
+
+    hideAllScreens();
+
+    finishScreen.classList.remove("hidden");
+
+}
+
+
+// TEDDY TALKING
+
+function goToStory() {
+
+    hideAllScreens();
+
+    storyScreen.classList.remove("hidden");
+
+}
+
+
+// TEDDY OPENING LETTER
+
+function goToOpen() {
+
+    hideAllScreens();
+
+    openScreen.classList.remove("hidden");
+
+}
+
+
+// TEDDY READING LETTER
+
+function goToReading() {
+
+    hideAllScreens();
+
+    readingScreen.classList.remove("hidden");
+
+}
+
+
+// OPEN LONG LETTER
+
+function openLetter() {
+
+    hideAllScreens();
+
+    letterScreen.classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+// RESTART
+
+function restartWebsite() {
+
+    hideAllScreens();
+
+    opening.classList.remove("hidden");
+
+    collected = 0;
+
+    updateScore();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+</script>
 
 </body>
 </html>
