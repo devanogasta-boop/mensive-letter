@@ -67,7 +67,7 @@
             margin-top: 20px;
         }
 
-        /* TEDDY IMAGE */
+        /* TEDDY SAAT BERMAIN */
 
         #teddy {
             position: absolute;
@@ -82,7 +82,7 @@
             pointer-events: none;
         }
 
-        /* LOVE LETTERS */
+        /* SURAT */
 
         .letter {
             position: absolute;
@@ -114,12 +114,22 @@
             font-weight: bold;
         }
 
+        /* TEDDY SAAT FINISH */
+
+        #finishTeddy {
+            width: 230px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px auto;
+        }
+
     </style>
 </head>
 
 <body>
 
-    <!-- OPENING SCREEN -->
+    <!-- OPENING -->
 
     <div class="card" id="opening">
 
@@ -150,7 +160,6 @@
 
         <div id="gameArea">
 
-            <!-- Teddy picture -->
             <img
                 id="teddy"
                 src="teddy-catching.png"
@@ -170,13 +179,11 @@
 
         <p>All the letters have been collected!</p>
 
-        <div style="margin: 15px 0;">
-            <img
-                src="teddy-catching.png"
-                alt="Happy Teddy"
-                style="width: 180px; max-width: 100%;"
-            >
-        </div>
+        <img
+            id="finishTeddy"
+            src="teddy-finish.png"
+            alt="Teddy holding a love letter"
+        >
 
         <h2>Good job!</h2>
 
@@ -222,7 +229,7 @@
         });
 
 
-        // CREATE 5 LETTERS
+        // CREATE LETTERS
 
         function createLetters() {
 
@@ -245,7 +252,7 @@
                 letter.style.top = Math.random() * 65 + "%";
 
 
-                // CLICK LETTER
+                // WHEN LETTER IS CLICKED
 
                 letter.addEventListener("click", function() {
 
@@ -288,7 +295,7 @@
         }
 
 
-        // RESTART
+        // PLAY AGAIN
 
         restartButton.addEventListener("click", function() {
 
