@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>A Little Love Letter ♡</title>
+<title>For You, My Love ♡</title>
 
 <style>
 * {
@@ -13,614 +13,702 @@
 
 body {
     margin: 0;
-    padding: 18px;
-    background: #ffe4ec;
-    font-family: Arial, sans-serif;
+    background: #ffe8ef;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #9e526c;
     text-align: center;
-    color: #b85c7a;
+    overflow-x: hidden;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 18px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
 }
 
 h1 {
-    color: #d96f94;
-    font-size: 28px;
+    color: #d66d91;
+    font-size: 30px;
+    margin-bottom: 12px;
 }
 
 h2 {
-    color: #d96f94;
+    color: #d66d91;
+    font-size: 24px;
 }
 
 p {
     line-height: 1.8;
 }
 
-.card {
-    width: 94%;
-    max-width: 440px;
-    margin: 25px auto;
-    padding: 25px;
-    background: #fff8f5;
-    border: 4px solid white;
-    border-radius: 30px;
-    box-shadow: 0 8px 20px #e8a8bd;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* BUTTONS */
-
 button {
-    background: #e99ab5;
+    border: none;
+    padding: 14px 25px;
+    background: #e58aaa;
     color: white;
-    border: 3px solid white;
-    padding: 14px 24px;
     border-radius: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 8px;
+    font-size: 15px;
     cursor: pointer;
+    margin-top: 18px;
+    font-family: inherit;
+    box-shadow: 0 4px 12px #e7a4bc55;
+    transition: 0.2s;
 }
 
 button:active {
-    transform: scale(0.95);
+    transform: scale(0.96);
+}
+
+button:hover {
+    background: #d66d91;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    background: #fffaf5;
+    border-radius: 25px;
+    padding: 25px 20px;
+    box-shadow: 0 8px 25px #d58ca833;
+}
+
+.teddy {
+    width: 230px;
+    max-width: 85%;
+    height: auto;
+    object-fit: contain;
+    margin: 15px auto;
+}
+
+.small {
+    font-size: 14px;
+    color: #b77a90;
+}
+
+.heart {
+    color: #e98aaa;
+}
+
+/* OPENING */
+
+#opening {
+    background:
+        radial-gradient(circle at top, #fff7fa, transparent 65%),
+        #ffe8ef;
+}
+
+.opening-title {
+    font-size: 34px;
+}
+
+.opening-text {
+    max-width: 300px;
 }
 
 /* GAME */
 
-#gameArea {
+#game {
     background: #fff0f5;
-    border: 3px dashed #e99ab5;
-    border-radius: 25px;
-    height: 380px;
-    position: relative;
-    overflow: hidden;
-    margin-top: 20px;
 }
 
-#teddyGame {
+.game-box {
+    width: 100%;
+    max-width: 400px;
+}
+
+.game-area {
+    height: 350px;
+    background: #fffaf5;
+    border: 3px dashed #f0bfd0;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.game-teddy {
+    width: 150px;
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    height: 170px;
-    max-width: 75%;
-    width: auto;
-    object-fit: contain;
-    pointer-events: none;
 }
 
 .letter {
     position: absolute;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-size: 38px;
-    z-index: 2;
+    font-size: 35px;
+    cursor: pointer;
+    user-select: none;
     animation: float 2s infinite ease-in-out;
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(0) rotate(-8deg);
-    }
-
-    50% {
-        transform: translateY(-12px) rotate(8deg);
-    }
-
-    100% {
-        transform: translateY(0) rotate(-8deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
 }
 
-#score {
-    font-size: 21px;
-    font-weight: bold;
+/* FINISH */
+
+#finish {
+    background: #fff0f5;
 }
 
-/* TEDDY PICTURES */
-
-.teddyPicture {
-    display: block;
-    width: 240px;
-    max-width: 90%;
-    height: auto;
-    margin: 20px auto;
-}
-
-/* TEDDY DIALOGUE */
+/* STORY */
 
 .dialogue {
     background: #fff0f5;
-    border: 2px dashed #edb1c5;
-    border-radius: 22px;
+    border-radius: 18px;
     padding: 18px;
-    margin: 20px 0;
-    font-size: 17px;
     line-height: 1.8;
+    margin: 15px 0;
 }
 
-/* LETTER */
+/* LETTER PAPER */
 
-#letterScreen {
-    max-width: 600px;
+#reading {
+    background: #fff0f5;
 }
 
 .paper {
-    background: #fffdf8;
-    border: 2px solid #f3d6df;
-    border-radius: 15px;
-    padding: 24px;
+    background: #fffdf6;
+    max-width: 550px;
+    width: 100%;
+    padding: 30px 23px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px #d7a1b233;
     text-align: left;
-    box-shadow: 0 4px 12px #efd5df;
+    border: 1px solid #f3e4d4;
 }
 
-.paper h1 {
+.paper-title {
     text-align: center;
+    color: #c77991;
+    margin-bottom: 25px;
 }
 
-.paper p {
-    line-height: 1.9;
-    font-size: 16px;
-    color: #916579;
+.letter-content {
+    color: #765763;
+    font-size: 15px;
+    line-height: 2;
     white-space: pre-line;
-}
-
-.date {
-    text-align: center;
-    font-size: 13px;
-    color: #c78aa2;
 }
 
 .signature {
     text-align: right;
     margin-top: 30px;
+    color: #c77991;
+    line-height: 2;
 }
 
-.footer {
-    font-size: 13px;
-    margin-top: 20px;
+.scroll-note {
+    font-size: 12px;
+    color: #bd8a9d;
+    text-align: center;
+    margin-top: 15px;
 }
 
-.heart {
-    color: #e98aab;
+/* FINAL */
+
+#final {
+    background: #ffe8ef;
 }
 
+.final-card {
+    max-width: 420px;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 26px;
+    }
+
+    .paper {
+        padding: 23px 17px;
+    }
+
+    .letter-content {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+}
 </style>
 </head>
 
 <body>
 
+<!-- SCREEN 1: OPENING -->
 
-<!-- ========================== -->
-<!-- 1. OPENING -->
-<!-- ========================== -->
+<section class="screen active" id="opening">
 
-<div class="card" id="opening">
+    <div class="card">
 
-    <h1>Catch the Love Letters! ♡</h1>
+        <div style="font-size:35px;">♡ 💌 ♡</div>
 
-    <p>Help Teddy collect all the love letters!</p>
+        <h1 class="opening-title">
+            Catch the Love Letters!
+        </h1>
 
-    <h2>Oh no! 💌</h2>
-
-    <p>The love letters are falling everywhere!</p>
-
-    <p>Help Teddy catch them!</p>
-
-    <button onclick="startGame()">
-        START GAME ♡
-    </button>
-
-</div>
-
-
-<!-- ========================== -->
-<!-- 2. GAME -->
-<!-- ========================== -->
-
-<div class="card hidden" id="gameScreen">
-
-    <h1>Catch the Letters! 💌</h1>
-
-    <p>Tap all the letters to help Teddy!</p>
-
-    <p id="score">Letters: 0 / 5</p>
-
-    <div id="gameArea">
+        <p class="opening-text">
+            Someone has sent you a little surprise.
+            Help Teddy catch all the letters!
+        </p>
 
         <img
-            id="teddyGame"
             src="teddy-catching.png"
+            class="teddy"
             alt="Teddy catching letters"
         >
 
-    </div>
-
-</div>
-
-
-<!-- ========================== -->
-<!-- 3. GAME FINISH -->
-<!-- ========================== -->
-
-<div class="card hidden" id="finishScreen">
-
-    <h1>You did it! ♡</h1>
-
-    <p>All the letters have been collected!</p>
-
-    <img
-        class="teddyPicture"
-        src="teddy-finish.png"
-        alt="Teddy holding a letter"
-    >
-
-    <h2>Good job!</h2>
-
-    <p>You helped Teddy collect all 5 letters!</p>
-
-    <button onclick="goToStory()">
-        CONTINUE ♡
-    </button>
-
-</div>
-
-
-<!-- ========================== -->
-<!-- 4. TEDDY TALKING -->
-<!-- ========================== -->
-
-<div class="card hidden" id="storyScreen">
-
-    <h1>A Little Surprise ♡</h1>
-
-    <img
-        class="teddyPicture"
-        src="teddy-finish.png"
-        alt="Teddy holding an envelope"
-    >
-
-    <div class="dialogue">
-
-        <p>
-            Psst... hey, you! ♡
+        <p class="small">
+            There are 5 little letters waiting for you...
         </p>
 
-        <p>
-            I have something for you!
-        </p>
-
-        <p>
-            Someone sent you a little surprise.
-            I think you'll love it!
-        </p>
+        <button onclick="startGame()">
+            START GAME ♡
+        </button>
 
     </div>
 
-    <button onclick="goToOpen()">
-        CLICK CLICK ♡
-    </button>
-
-</div>
+</section>
 
 
-<!-- ========================== -->
-<!-- 5. TEDDY OPENING LETTER -->
-<!-- ========================== -->
+<!-- SCREEN 2: GAME -->
 
-<div class="card hidden" id="openScreen">
+<section class="screen" id="game">
 
-    <h1>What's Inside? 💌</h1>
+    <div class="game-box">
 
-    <img
-        class="teddyPicture"
-        src="teddy-open.png"
-        alt="Teddy opening an envelope"
-    >
-
-    <div class="dialogue">
+        <h1>Catch the Letters! 💌</h1>
 
         <p>
-            Ooh! Let's see what's inside...
+            Tap all the letters to help Teddy!
         </p>
 
-        <p>
-            Wait... I think there's something special here!
-        </p>
+        <h2>
+            <span id="score">0</span> / 5
+        </h2>
 
-    </div>
+        <div class="game-area" id="gameArea">
 
-    <button onclick="goToReading()">
-        NEXT ♡
-    </button>
-
-</div>
-
-
-<!-- ========================== -->
-<!-- 6. TEDDY READING -->
-<!-- ========================== -->
-
-<div class="card hidden" id="readingScreen">
-
-    <h1>A Letter Just for You ♡</h1>
-
-    <img
-        class="teddyPicture"
-        src="teddy-reading.png"
-        alt="Teddy reading a letter"
-    >
-
-    <div class="dialogue">
-
-        <p>
-            Oh my! This letter is especially for you!
-        </p>
-
-        <p>
-            I think you should read it yourself.
-        </p>
-
-        <p>
-            Take your time... it's something special. ♡
-        </p>
-
-    </div>
-
-    <button onclick="openLetter()">
-        READ MY LETTER 💌
-    </button>
-
-</div>
-
-
-<!-- ========================== -->
-<!-- 7. LONG LETTER -->
-<!-- ========================== -->
-
-<div class="card hidden" id="letterScreen">
-
-    <div class="paper">
-
-        <h1>A Letter for You ♡</h1>
-
-        <p class="date">
-            A little something made with love.
-        </p>
-
-        <hr style="border: 1px dashed #edb1c5;">
-
-        <!-- EDIT YOUR MESSAGE HERE -->
-
-        <p>Dear [Name],</p>
-
-        <p>
-            [Write your mensive message here.
-
-            Replace this paragraph with your own words.
-            You can write as long as you want.]
-        </p>
-
-        <p>
-            [Write another paragraph here.
-            You can include your memories, wishes,
-            appreciation, and sweet messages.]
-        </p>
-
-        <p>
-            [Write your final paragraph here.]
-        </p>
-
-        <div class="signature">
-
-            <p>With love, ♡</p>
-
-            <p>[Your Name]</p>
+            <img
+                src="teddy-catching.png"
+                class="game-teddy"
+                alt="Teddy"
+            >
 
         </div>
 
+        <p class="small">
+            Tap the floating letters ♡
+        </p>
+
     </div>
 
-    <p class="footer">
-        Made with love and a little Teddy magic 🧸💌
-    </p>
+</section>
 
-    <button onclick="restartWebsite()">
-        PLAY AGAIN ♡
+
+<!-- SCREEN 3: FINISH -->
+
+<section class="screen" id="finish">
+
+    <div class="card">
+
+        <h1>You did it! ♡</h1>
+
+        <p>
+            You caught all the letters!
+            Teddy has something special for you.
+        </p>
+
+        <img
+            src="teddy-finish.png"
+            class="teddy"
+            alt="Teddy holding a letter"
+        >
+
+        <p>
+            Your little surprise is waiting...
+        </p>
+
+        <button onclick="goToStory()">
+            CONTINUE ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 4: TEDDY SPEAKING -->
+
+<section class="screen" id="story">
+
+    <div class="card">
+
+        <h1>A Little Surprise ♡</h1>
+
+        <img
+            src="teddy-finish.png"
+            class="teddy"
+            alt="Teddy holding an envelope"
+        >
+
+        <div class="dialogue">
+
+            <p>
+                Psst... hey, you!
+            </p>
+
+            <p>
+                I have something for you!
+                Someone sent you a little surprise.
+                I think you'll love it!
+            </p>
+
+        </div>
+
+        <button onclick="goToOpen()">
+            CLICK CLICK ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 5: TEDDY OPENING LETTER -->
+
+<section class="screen" id="open">
+
+    <div class="card">
+
+        <h1>What's Inside? 💌</h1>
+
+        <img
+            src="teddy-open.png"
+            class="teddy"
+            alt="Teddy opening the letter"
+        >
+
+        <div class="dialogue">
+
+            <p>
+                Ooh! Let's see what's inside...
+            </p>
+
+            <p>
+                Wait... I think there's something
+                special here!
+            </p>
+
+        </div>
+
+        <button onclick="goToReading()">
+            NEXT ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 6: TEDDY READING -->
+
+<section class="screen" id="reading">
+
+    <div class="card">
+
+        <h1>A Letter Just for You ♡</h1>
+
+        <img
+            src="teddy-reading.png"
+            class="teddy"
+            alt="Teddy reading a letter"
+        >
+
+        <div class="dialogue">
+
+            <p>
+                Oh my! This letter is especially
+                for you!
+            </p>
+
+            <p>
+                I think you should read it yourself.
+                Take your time...
+                it's something special.
+            </p>
+
+        </div>
+
+        <button onclick="openLetter()">
+            READ MY LETTER 💌
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 7: YOUR LONG LETTER -->
+
+<section class="screen" id="letter">
+
+    <div class="paper">
+
+        <h2 class="paper-title">
+            A Letter Just for You 💌
+        </h2>
+
+        <div class="letter-content">
+
+Halo, sayang. Happy mensive ya, 1 tahun 3 bulan kita. 🤍
+
+Nggak terasa ya, kita udah sampai di titik ini. Banyak banget hal yang udah kita lewatin selama hubungan ini berjalan. Ada banyak cerita, banyak momen bahagia, ada hal-hal yang mungkin bikin kita sedih, kecewa, capek, bahkan mungkin ada saat-saat kita sama-sama bingung harus gimana. Tapi di antara semua itu, aku masih bersyukur karena sampai hari ini kita masih sama-sama di sini, masih punya kesempatan untuk saling mengenal, saling memahami, dan terus belajar tentang satu sama lain.
+
+Jujur, aku mau minta maaf ya. Bulan lalu aku nggak kasih kamu apa-apa, dan bulan ini mungkin aku juga nggak bisa memberikan sesuatu yang benar-benar istimewa. Tapi aku tetap pengen kamu tahu kalau kamu selalu punya tempat yang spesial di hati aku. Aku nggak mau hari ini berlalu begitu aja tanpa aku menyampaikan apa yang selama ini mungkin belum sempat aku bilang dengan baik.
+
+Aku juga mau minta maaf kalau selama hubungan kita, aku sering banget kelihatan banyak nuntut, banyak rewelnya, banyak maunya, dan kadang lebih sering memperlihatkan sisi egois aku daripada sisi yang bisa memahami kamu. Maaf kalau aku sering bikin kamu harus menghadapi mood aku, harus menenangkan aku, atau harus mencari cara supaya aku nggak merasa sedih. Aku sadar mungkin nggak semua hal harus selalu berjalan sesuai apa yang aku mau, dan nggak semua perasaan aku harus kamu tanggung sendirian.
+
+Maaf juga untuk waktu itu, ketika aku sampai bilang kalau November kamu nggak berubah, aku nggak mau sama kamu lagi. Jujur, aku sedih bahkan saat aku mengucapkan kalimat itu. Sebenarnya aku nggak mau mengancam hubungan kita dengan kata-kata seperti itu. Aku sayang kamu, dan mungkin saat itu aku sedang terlalu terbawa perasaan sampai nggak bisa menyampaikan apa yang sebenarnya aku rasakan dengan cara yang baik. Aku tahu kata-kata seperti itu bisa bikin kamu kepikiran, bisa bikin kamu merasa nggak cukup, atau bahkan takut kehilangan hubungan ini. Padahal aku nggak pernah ingin membuat kamu merasa seperti itu.
+
+Aku sadar aku masih punya banyak kekurangan. Aku belum bisa selalu menjadi pasangan yang baik buat kamu. Aku masih sering salah memahami sesuatu, masih suka terburu-buru menyimpulkan, masih belum pandai mengatur emosi, dan terkadang lupa kalau kamu juga punya perasaan, punya capek, punya hari-hari yang mungkin nggak mudah. Maaf kalau akhir-akhir ini aku banyak menyakiti kamu, baik dari kata-kata aku maupun sikap aku. Aku nggak pernah menganggap perasaan kamu sebagai sesuatu yang sepele, dan aku nggak ingin rasa sayang yang kita punya justru membuat kamu merasa lelah.
+
+Tapi di sisi lain, aku juga mau bilang kalau aku selalu merasa beruntung punya kamu. Aku nggak tahu bagaimana cara menjelaskan betapa bersyukurnya aku dipertemukan dengan seseorang yang sabarnya luar biasa seperti kamu. Kamu selalu punya cara untuk menghadapi aku, bahkan di saat aku sedang sulit dimengerti. Kamu jarang marah sama aku, kamu selalu berusaha ngomong hal-hal baik, selalu berusaha menenangkan aku, dan entah bagaimana, kata-kata kamu sering kali bisa membuat hati aku jauh lebih tenang.
+
+Aku suka bagaimana kamu memperlakukan aku. Aku suka bagaimana kamu tetap berusaha lembut ketika aku sedang berantakan. Aku suka bagaimana kamu bisa membuat hal-hal sederhana terasa menyenangkan. Kadang mungkin kamu nggak sadar, tapi hal kecil yang kamu lakukan, cara kamu merespons aku, cara kamu mendengarkan cerita aku, bahkan obrolan random kita sehari-hari, semuanya punya arti buat aku. Ada banyak momen ketika aku merasa bahagia hanya karena bisa ngobrol sama kamu, tanpa harus melakukan sesuatu yang istimewa.
+
+I always feel happy with you, even in the simplest moments. Sampai sekarang, aku masih merasa senang punya kamu di hidup aku. Aku masih suka menunggu cerita kamu, masih suka berbagi hal-hal kecil sama kamu, masih suka ketika kita bisa ngobrol panjang tentang apa aja, dan masih suka perasaan ketika aku tahu ada kamu yang bisa aku ajak cerita. Aku nggak cuma bahagia saat semuanya berjalan baik, tapi aku juga menghargai keberadaan kamu di hari-hari biasa kita.
+
+Aku ingin hubungan ini terus punya banyak cerita. Aku masih pengen kita punya lebih banyak kenangan, lebih banyak obrolan yang nggak ada habisnya, lebih banyak momen lucu yang nantinya bisa kita ingat lagi, lebih banyak hal baru yang kita pelajari bersama, dan lebih banyak hari di mana kita bisa bilang, "Ternyata kita sudah melewati banyak hal ya."
+
+Aku nggak berharap hubungan kita selalu sempurna. Aku tahu kita adalah dua orang yang berbeda, yang punya cara berpikir, cara menyampaikan perasaan, dan cara menghadapi masalah yang mungkin nggak selalu sama. Akan ada saatnya kita salah paham, akan ada saatnya kita kecewa, dan mungkin akan ada hari-hari ketika kita nggak tahu harus mulai memperbaiki sesuatu dari mana. Tapi aku berharap, di setiap keadaan itu, kita tetap mau saling mendengarkan. Aku ingin kita belajar untuk nggak saling menyakiti ketika sedang marah, nggak menggunakan kata-kata yang bisa meninggalkan luka, dan nggak menjadikan kekurangan satu sama lain sebagai alasan untuk berhenti mencoba.
+
+Aku ingin belajar lebih baik dalam menyayangi kamu. Bukan cuma meminta kamu memahami aku, tapi juga berusaha memahami kamu. Bukan cuma berharap kamu berubah untuk aku, tapi juga mau memperbaiki diri aku sendiri. Aku ingin bisa menjadi tempat yang nyaman buat kamu juga, tempat kamu nggak harus selalu terlihat kuat, nggak harus selalu punya jawaban, dan nggak harus selalu menenangkan aku. Kamu juga boleh cerita ketika kamu sedih, kamu juga boleh bilang kalau ada sikap aku yang menyakitkan, dan kamu juga berhak didengarkan.
+
+Terima kasih ya, sudah bertahan sejauh ini sama aku. Terima kasih untuk kesabaran kamu, untuk semua perhatian yang mungkin sering aku anggap biasa padahal sangat berarti, untuk waktu yang kamu luangkan, untuk kata-kata baik yang selalu kamu berikan, dan untuk semua usaha yang kamu lakukan agar hubungan kita tetap terasa baik. Terima kasih sudah menjadi bagian dari hari-hari aku, sudah membuat aku tertawa, sudah menemani aku bercerita, dan sudah memberikan banyak hal yang mungkin nggak selalu bisa aku balas dengan cara yang sama.
+
+Aku harap kamu juga tahu kalau aku menghargai kamu lebih dari yang bisa aku jelaskan lewat surat ini. Aku nggak ingin kamu berpikir bahwa semua yang kamu lakukan nggak pernah aku lihat. Aku melihatnya, aku merasakannya, dan aku menyimpannya baik-baik dalam ingatan aku.
+
+Happy 1 year and 3 months, sayang. Terima kasih karena sudah sampai sejauh ini sama aku. Maaf untuk semua hal yang masih belum bisa aku lakukan dengan baik, dan semoga ke depannya aku bisa lebih baik dalam memperlakukan kamu, lebih sabar, lebih dewasa, lebih bisa memahami, dan lebih bisa menjaga perasaan kamu.
+
+Aku masih ingin banyak hal bersama kamu. Masih ingin mendengar cerita-cerita kamu, masih ingin berbagi hari-hari aku, masih ingin merayakan hal-hal kecil bersama, dan masih ingin melihat bagaimana hubungan kita tumbuh seiring waktu. Semoga kita nggak berhenti belajar satu sama lain, nggak berhenti menghargai satu sama lain, dan selalu punya alasan untuk memperbaiki apa yang memang perlu diperbaiki.
+
+Aku sayang kamu. Terima kasih sudah menjadi kamu, dan terima kasih sudah menjadi bagian dari cerita aku selama 1 tahun 3 bulan ini.
+
+Here's to more stories, more laughter, more understanding, and more beautiful memories together. Happy mensive, sayang. 🤍 I love you jendral ku sayang
+
+        </div>
+
+        <div class="signature">
+            With love,<br>
+            <strong>[Galak]</strong> ♡
+        </div>
+
+        <p class="scroll-note">
+            Take your time reading this letter ♡
+        </p>
+
+    </div>
+
+    <button onclick="goToFinal()">
+        ONE LAST THING... ♡
     </button>
 
-</div>
+</section>
 
 
-<!-- ========================== -->
-<!-- JAVASCRIPT -->
-<!-- ========================== -->
+<!-- SCREEN 8: FINAL -->
+
+<section class="screen" id="final">
+
+    <div class="card final-card">
+
+        <div style="font-size:40px;">
+            ♡ 🧸 ♡
+        </div>
+
+        <h1>That's All, My Love</h1>
+
+        <img
+            src="teddy-finish.png"
+            class="teddy"
+            alt="Teddy holding a letter"
+        >
+
+        <p>
+            I hope this little surprise made you smile.
+        </p>
+
+        <p>
+            Thank you for being part of my story.
+            Happy mensive, my favorite person. 🤍
+        </p>
+
+        <p class="heart">
+            Made with love, just for you.
+        </p>
+
+        <button onclick="restartWebsite()">
+            READ IT AGAIN ♡
+        </button>
+
+    </div>
+
+</section>
+
 
 <script>
 
-let collected = 0;
+/* SCREEN CONTROL */
 
+function showScreen(screenId) {
 
-// GET SCREENS
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
 
-const opening = document.getElementById("opening");
-const gameScreen = document.getElementById("gameScreen");
-const finishScreen = document.getElementById("finishScreen");
-const storyScreen = document.getElementById("storyScreen");
-const openScreen = document.getElementById("openScreen");
-const readingScreen = document.getElementById("readingScreen");
-const letterScreen = document.getElementById("letterScreen");
+    document.getElementById(screenId).classList.add("active");
 
-const gameArea = document.getElementById("gameArea");
-const score = document.getElementById("score");
-
-
-// HIDE ALL SCREENS
-
-function hideAllScreens() {
-
-    opening.classList.add("hidden");
-    gameScreen.classList.add("hidden");
-    finishScreen.classList.add("hidden");
-    storyScreen.classList.add("hidden");
-    openScreen.classList.add("hidden");
-    readingScreen.classList.add("hidden");
-    letterScreen.classList.add("hidden");
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-// START GAME
+/* GAME */
+
+let score = 0;
+const totalLetters = 5;
 
 function startGame() {
 
-    hideAllScreens();
+    score = 0;
 
-    gameScreen.classList.remove("hidden");
+    document.getElementById("score").textContent = score;
 
-    collected = 0;
-
-    updateScore();
+    showScreen("game");
 
     createLetters();
-
 }
 
-
-// CREATE 5 LETTERS
 
 function createLetters() {
 
-    document.querySelectorAll(".letter").forEach(function(letter) {
+    const area = document.getElementById("gameArea");
+
+    area.querySelectorAll(".letter").forEach(letter => {
         letter.remove();
     });
 
-    for (let i = 0; i < 5; i++) {
+    const positions = [
+        { left: "10%", top: "15%" },
+        { left: "70%", top: "20%" },
+        { left: "35%", top: "40%" },
+        { left: "80%", top: "55%" },
+        { left: "15%", top: "65%" }
+    ];
 
-        const letter = document.createElement("button");
+    positions.forEach((position, index) => {
 
-        letter.innerHTML = "💌";
+        const letter = document.createElement("div");
 
         letter.className = "letter";
+        letter.textContent = "💌";
 
-        letter.setAttribute("aria-label", "Collect letter");
+        letter.style.left = position.left;
+        letter.style.top = position.top;
 
-        letter.style.left = Math.random() * 80 + "%";
+        letter.onclick = function() {
 
-        letter.style.top = Math.random() * 65 + "%";
-
-
-        // CLICK LETTER
-
-        letter.addEventListener("click", function() {
-
-            letter.remove();
-
-            collected++;
-
-            updateScore();
-
-            if (collected === 5) {
-                finishGame();
+            if (letter.classList.contains("caught")) {
+                return;
             }
 
-        });
+            letter.classList.add("caught");
 
-        gameArea.appendChild(letter);
+            letter.style.display = "none";
 
-    }
+            score++;
+
+            document.getElementById("score").textContent = score;
+
+            if (score === totalLetters) {
+
+                setTimeout(finishGame, 500);
+
+            }
+
+        };
+
+        area.appendChild(letter);
+
+    });
 
 }
 
-
-// UPDATE SCORE
-
-function updateScore() {
-
-    score.textContent = "Letters: " + collected + " / 5";
-
-}
-
-
-// FINISH GAME
 
 function finishGame() {
 
-    hideAllScreens();
-
-    finishScreen.classList.remove("hidden");
+    showScreen("finish");
 
 }
 
 
-// TEDDY TALKING
+/* STORY FLOW */
 
 function goToStory() {
 
-    hideAllScreens();
-
-    storyScreen.classList.remove("hidden");
+    showScreen("story");
 
 }
 
-
-// TEDDY OPENING LETTER
 
 function goToOpen() {
 
-    hideAllScreens();
-
-    openScreen.classList.remove("hidden");
+    showScreen("open");
 
 }
 
-
-// TEDDY READING LETTER
 
 function goToReading() {
 
-    hideAllScreens();
-
-    readingScreen.classList.remove("hidden");
+    showScreen("reading");
 
 }
 
-
-// OPEN LONG LETTER
 
 function openLetter() {
 
-    hideAllScreens();
-
-    letterScreen.classList.remove("hidden");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    showScreen("letter");
 
 }
 
 
-// RESTART
+function goToFinal() {
+
+    showScreen("final");
+
+}
+
+
+/* RESTART */
 
 function restartWebsite() {
 
-    hideAllScreens();
+    score = 0;
 
-    opening.classList.remove("hidden");
+    document.getElementById("score").textContent = "0";
 
-    collected = 0;
-
-    updateScore();
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    showScreen("opening");
 
 }
 
