@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Mensive Letter ♡</title>
-
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mensive Letter ♡</title>
 
     <style>
         body {
@@ -45,6 +46,7 @@
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         button:active {
@@ -52,7 +54,7 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         #gameArea {
@@ -68,24 +70,35 @@
         #teddy {
             font-size: 75px;
             position: absolute;
-            bottom: 10px;
+            bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
+            z-index: 1;
         }
 
         .letter {
             position: absolute;
             font-size: 38px;
-            border: none;
             background: transparent;
+            border: none;
             padding: 0;
+            margin: 0;
             animation: float 2s infinite ease-in-out;
+            z-index: 2;
         }
 
         @keyframes float {
-            0% { transform: translateY(0px) rotate(-8deg); }
-            50% { transform: translateY(-12px) rotate(8deg); }
-            100% { transform: translateY(0px) rotate(-8deg); }
+            0% {
+                transform: translateY(0px) rotate(-8deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(8deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(-8deg);
+            }
         }
 
         #score {
@@ -97,7 +110,8 @@
 
 <body>
 
-    <!-- OPENING -->
+    <!-- OPENING SCREEN -->
+
     <div class="card" id="opening">
 
         <h1>Catch the Love Letters! ♡</h1>
@@ -110,12 +124,13 @@
 
         <p>Help Teddy catch them!</p>
 
-        <button onclick="startGame()">START GAME ♡</button>
+        <button id="startButton">START GAME ♡</button>
 
     </div>
 
 
-    <!-- GAME -->
+    <!-- GAME SCREEN -->
+
     <div class="card hidden" id="gameScreen">
 
         <h1>Catch the Letters! 💌</h1>
@@ -133,7 +148,8 @@
     </div>
 
 
-    <!-- FINISH -->
+    <!-- FINISH SCREEN -->
+
     <div class="card hidden" id="finishScreen">
 
         <h1>You did it! ♡</h1>
@@ -146,20 +162,36 @@
 
         <p>You helped Teddy collect all 5 letters!</p>
 
-        <button onclick="restartGame()">PLAY AGAIN ♡</button>
+        <button id="restartButton">PLAY AGAIN ♡</button>
 
     </div>
 
+
+    <!-- JAVASCRIPT -->
 
     <script>
 
         let collected = 0;
 
-        function startGame() {
+        const opening = document.getElementById("opening");
+        const gameScreen = document.getElementById("gameScreen");
+        const finishScreen = document.getElementById("finishScreen");
+        const gameArea = document.getElementById("gameArea");
+        const score = document.getElementById("score");
 
-            document.getElementById("opening").classList.add("hidden");
+        const startButton = document.getElementById("startButton");
+        const restartButton = document.getElementById("restartButton");
 
-            document.getElementById("gameScreen").classList.remove("hidden");
+
+        // START GAME
+
+        startButton.addEventListener("click", function() {
+
+            opening.classList.add("hidden");
+
+            finishScreen.classList.add("hidden");
+
+            gameScreen.classList.remove("hidden");
 
             collected = 0;
 
@@ -167,19 +199,17 @@
 
             createLetters();
 
-        }
+        });
 
+
+        // CREATE LETTERS
 
         function createLetters() {
 
-            const gameArea = document.getElementById("gameArea");
-
-            // Hapus surat lama
-            document.querySelectorAll(".letter").forEach(letter => {
+            document.querySelectorAll(".letter").forEach(function(letter) {
                 letter.remove();
             });
 
-            // Buat 5 surat
             for (let i = 0; i < 5; i++) {
 
                 const letter = document.createElement("button");
@@ -188,11 +218,16 @@
 
                 letter.className = "letter";
 
-                letter.style.left = Math.random() * 75 + "%";
+                letter.setAttribute("aria-label", "Collect letter");
 
-                letter.style.top = Math.random() * 65 + "%";
+                letter.style.left = Math.random() * 80 + "%";
 
-                letter.onclick = function() {
+                letter.style.top = Math.random() * 70 + "%";
+
+
+                // WHEN LETTER IS CLICKED
+
+                letter.addEventListener("click", function() {
 
                     letter.remove();
 
@@ -200,11 +235,11 @@
 
                     updateScore();
 
-                    if (collected === 5) {
+                    if (collected >= 5) {
                         finishGame();
                     }
 
-                };
+                });
 
                 gameArea.appendChild(letter);
 
@@ -213,30 +248,39 @@
         }
 
 
+        // UPDATE SCORE
+
         function updateScore() {
 
-            document.getElementById("score").innerHTML =
-                "Letters: " + collected + " / 5";
+            score.textContent = "Letters: " + collected + " / 5";
 
         }
 
+
+        // FINISH GAME
 
         function finishGame() {
 
-            document.getElementById("gameScreen").classList.add("hidden");
+            gameScreen.classList.add("hidden");
 
-            document.getElementById("finishScreen").classList.remove("hidden");
-
-        }
-
-
-        function restartGame() {
-
-            document.getElementById("finishScreen").classList.add("hidden");
-
-            document.getElementById("opening").classList.remove("hidden");
+            finishScreen.classList.remove("hidden");
 
         }
+
+
+        // RESTART GAME
+
+        restartButton.addEventListener("click", function() {
+
+            finishScreen.classList.add("hidden");
+
+            opening.classList.remove("hidden");
+
+            collected = 0;
+
+            updateScore();
+
+        });
 
     </script>
 
