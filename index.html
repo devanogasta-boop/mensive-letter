@@ -7,23 +7,39 @@
 <title>For You, My Love ♡</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
     background: #ffe8ef;
-    font-family: Georgia, 'Times New Roman', serif;
     color: #9e526c;
     text-align: center;
     overflow-x: hidden;
 }
 
+h1 {
+    color: #d66d91;
+    font-size: 29px;
+}
+
+h2 {
+    color: #d66d91;
+}
+
+p {
+    line-height: 1.8;
+}
+
+/* SCREEN TRANSITION */
+
 .screen {
     display: none;
     min-height: 100vh;
-    padding: 35px 18px;
+    padding: 30px 18px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -31,22 +47,22 @@ body {
 
 .screen.active {
     display: flex;
+    animation: screenEnter 0.75s ease both;
 }
 
-h1 {
-    color: #d66d91;
-    font-size: 30px;
-    margin-bottom: 12px;
+@keyframes screenEnter {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-h2 {
-    color: #d66d91;
-    font-size: 24px;
-}
-
-p {
-    line-height: 1.8;
-}
+/* BUTTON */
 
 button {
     border: none;
@@ -58,65 +74,60 @@ button {
     cursor: pointer;
     margin-top: 18px;
     font-family: inherit;
-    box-shadow: 0 4px 12px #e7a4bc55;
-    transition: 0.2s;
+    box-shadow: 0 5px 15px #e7a4bc55;
+    transition: .25s;
 }
 
 button:active {
-    transform: scale(0.96);
+    transform: scale(.94);
 }
 
-button:hover {
-    background: #d66d91;
-}
+/* CARD */
 
 .card {
     width: 100%;
     max-width: 420px;
-    background: #fffaf5;
+    background: rgba(255,250,245,.91);
     border-radius: 25px;
-    padding: 25px 20px;
+    padding: 24px 20px;
     box-shadow: 0 8px 25px #d58ca833;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
 }
 
 .teddy {
     width: 230px;
     max-width: 85%;
     height: auto;
-    object-fit: contain;
     margin: 15px auto;
 }
 
 .small {
-    font-size: 14px;
+    font-size: 13px;
     color: #b77a90;
-}
-
-.heart {
-    color: #e98aaa;
 }
 
 /* OPENING */
 
 #opening {
-    background:
-        radial-gradient(circle at top, #fff7fa, transparent 65%),
-        #ffe8ef;
+    background: radial-gradient(circle at top, #fff7fa, transparent 65%), #ffe8ef;
 }
 
-.opening-title {
-    font-size: 34px;
-}
+/* GAME BACKGROUND */
 
-.opening-text {
-    max-width: 300px;
+#game {
+    background-image:
+        linear-gradient(
+            rgba(255,231,242,.69),
+            rgba(255,231,242,.69)
+        ),
+        url("game-bg.jpg.jpeg");
+
+    background-size: cover;
+    background-position: center;
 }
 
 /* GAME */
-
-#game {
-    background: #fff0f5;
-}
 
 .game-box {
     width: 100%;
@@ -125,12 +136,13 @@ button:hover {
 
 .game-area {
     height: 350px;
-    background: #fffaf5;
-    border: 3px dashed #f0bfd0;
+    background: rgba(255,250,245,.72);
+    border: 3px dashed #edbfd1;
     border-radius: 25px;
     position: relative;
     overflow: hidden;
     margin-top: 15px;
+    backdrop-filter: blur(4px);
 }
 
 .game-teddy {
@@ -141,47 +153,61 @@ button:hover {
     transform: translateX(-50%);
 }
 
-.letter {
+.letter-pickup {
     position: absolute;
     font-size: 35px;
     cursor: pointer;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
     animation: float 2s infinite ease-in-out;
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(-5deg); }
-    50% { transform: translateY(-8px) rotate(5deg); }
+    0%,100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(5deg);
+    }
 }
 
-/* FINISH */
-
-#finish {
-    background: #fff0f5;
-}
-
-/* STORY */
+/* DIALOGUE */
 
 .dialogue {
-    background: #fff0f5;
+    background: rgba(255,240,245,.9);
     border-radius: 18px;
-    padding: 18px;
+    padding: 17px;
     line-height: 1.8;
     margin: 15px 0;
 }
 
-/* LETTER PAPER */
+/* FLOWER BACKGROUND */
 
-#reading {
-    background: #fff0f5;
+#reading,
+#letter,
+#bonus,
+#final {
+    background-image:
+        linear-gradient(
+            rgba(255,246,249,.64),
+            rgba(255,246,249,.64)
+        ),
+        url("letter-bg.jpg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
+/* LETTER PAPER */
+
 .paper {
-    background: #fffdf6;
+    background: rgba(255,253,246,.96);
     max-width: 550px;
     width: 100%;
-    padding: 30px 23px;
-    border-radius: 8px;
+    padding: 28px 22px;
+    border-radius: 12px;
     box-shadow: 0 8px 30px #d7a1b233;
     text-align: left;
     border: 1px solid #f3e4d4;
@@ -214,36 +240,147 @@ button:hover {
     margin-top: 15px;
 }
 
-/* FINAL */
+/* LETTER REVEAL */
 
-#final {
-    background: #ffe8ef;
+#letter.active .paper {
+    animation: letterReveal 1.2s cubic-bezier(.2,.8,.2,1) both;
 }
+
+@keyframes letterReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(100px) scale(.72) rotate(3deg);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.03) rotate(-1deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0);
+    }
+}
+
+/* BONUS PHOTO */
+
+.bonus-photo {
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+    border-radius: 20px;
+    margin: 15px auto;
+    box-shadow: 0 8px 25px #d58ca833;
+}
+
+#bonus.active .bonus-photo {
+    animation: photoReveal 1.2s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes photoReveal {
+    0% {
+        opacity: 0;
+        transform: scale(.65) rotate(-5deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.05) rotate(2deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* FALLING HEARTS */
+
+.falling-heart {
+    position: fixed;
+    top: -40px;
+    z-index: 99;
+    pointer-events: none;
+
+    animation: heartRain linear forwards;
+
+    opacity: .85;
+}
+
+@keyframes heartRain {
+    0% {
+        transform: translateY(-5vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .9;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* FINAL */
 
 .final-card {
     max-width: 420px;
 }
 
-@media (max-width: 480px) {
+/* MOBILE */
+
+@media(max-width:480px) {
+
     h1 {
         font-size: 26px;
     }
 
     .paper {
-        padding: 23px 17px;
+        padding: 22px 17px;
     }
 
     .letter-content {
         font-size: 14px;
         line-height: 1.9;
     }
+
+    .game-area {
+        height: 330px;
+    }
+
 }
+
+@media(max-width:768px) {
+
+    #game,
+    #reading,
+    #letter,
+    #bonus,
+    #final {
+        background-attachment: scroll;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1: OPENING -->
+<!-- MUSIC -->
+
+<audio
+    id="backgroundMusic"
+    src="music.mp3.mpeg"
+    loop
+    preload="auto">
+</audio>
+
+
+<!-- 1 OPENING -->
 
 <section class="screen active" id="opening">
 
@@ -251,11 +388,9 @@ button:hover {
 
         <div style="font-size:35px;">♡ 💌 ♡</div>
 
-        <h1 class="opening-title">
-            Catch the Love Letters!
-        </h1>
+        <h1>Catch the Love Letters!</h1>
 
-        <p class="opening-text">
+        <p>
             Someone has sent you a little surprise.
             Help Teddy catch all the letters!
         </p>
@@ -279,7 +414,7 @@ button:hover {
 </section>
 
 
-<!-- SCREEN 2: GAME -->
+<!-- 2 GAME -->
 
 <section class="screen" id="game">
 
@@ -287,9 +422,7 @@ button:hover {
 
         <h1>Catch the Letters! 💌</h1>
 
-        <p>
-            Tap all the letters to help Teddy!
-        </p>
+        <p>Tap all the letters to help Teddy!</p>
 
         <h2>
             <span id="score">0</span> / 5
@@ -314,7 +447,7 @@ button:hover {
 </section>
 
 
-<!-- SCREEN 3: FINISH -->
+<!-- 3 FINISH GAME -->
 
 <section class="screen" id="finish">
 
@@ -333,9 +466,7 @@ button:hover {
             alt="Teddy holding a letter"
         >
 
-        <p>
-            Your little surprise is waiting...
-        </p>
+        <p>Your little surprise is waiting...</p>
 
         <button onclick="goToStory()">
             CONTINUE ♡
@@ -346,7 +477,7 @@ button:hover {
 </section>
 
 
-<!-- SCREEN 4: TEDDY SPEAKING -->
+<!-- 4 STORY -->
 
 <section class="screen" id="story">
 
@@ -362,9 +493,7 @@ button:hover {
 
         <div class="dialogue">
 
-            <p>
-                Psst... hey, you!
-            </p>
+            <p>Psst... hey, you!</p>
 
             <p>
                 I have something for you!
@@ -383,7 +512,7 @@ button:hover {
 </section>
 
 
-<!-- SCREEN 5: TEDDY OPENING LETTER -->
+<!-- 5 OPEN LETTER -->
 
 <section class="screen" id="open">
 
@@ -399,9 +528,7 @@ button:hover {
 
         <div class="dialogue">
 
-            <p>
-                Ooh! Let's see what's inside...
-            </p>
+            <p>Ooh! Let's see what's inside...</p>
 
             <p>
                 Wait... I think there's something
@@ -419,7 +546,7 @@ button:hover {
 </section>
 
 
-<!-- SCREEN 6: TEDDY READING -->
+<!-- 6 TEDDY READING -->
 
 <section class="screen" id="reading">
 
@@ -436,8 +563,7 @@ button:hover {
         <div class="dialogue">
 
             <p>
-                Oh my! This letter is especially
-                for you!
+                Oh my! This letter is especially for you!
             </p>
 
             <p>
@@ -457,7 +583,7 @@ button:hover {
 </section>
 
 
-<!-- SCREEN 7: YOUR LONG LETTER -->
+<!-- 7 LETTER -->
 
 <section class="screen" id="letter">
 
@@ -518,22 +644,58 @@ Here's to more stories, more laughter, more understanding, and more beautiful me
 
     </div>
 
-    <button onclick="goToFinal()">
+    <button onclick="goToBonus()">
         ONE LAST THING... ♡
     </button>
 
 </section>
 
 
-<!-- SCREEN 8: FINAL -->
+<!-- 8 BONUS PHOTO -->
+
+<section class="screen" id="bonus">
+
+    <div class="card">
+
+        <div style="font-size:35px;">🌷💐♡</div>
+
+        <h1>A Little Bonus for You</h1>
+
+        <img
+            src="bonus-photo.jpg.jpeg"
+            class="bonus-photo"
+            alt="A little surprise for you"
+        >
+
+        <div class="dialogue">
+
+            <p>
+                A little bouquet for you,
+                and a little bonus… me! Hehe.
+            </p>
+
+            <p>
+                I love you, my dear General. ♡
+            </p>
+
+        </div>
+
+        <button onclick="goToFinal()">
+            CONTINUE ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- 9 FINAL -->
 
 <section class="screen" id="final">
 
     <div class="card final-card">
 
-        <div style="font-size:40px;">
-            ♡ 🧸 ♡
-        </div>
+        <div style="font-size:40px;">♡ 🧸 ♡</div>
 
         <h1>That's All, My Love</h1>
 
@@ -552,7 +714,7 @@ Here's to more stories, more laughter, more understanding, and more beautiful me
             Happy mensive, my favorite person. 🤍
         </p>
 
-        <p class="heart">
+        <p style="color:#e58aaa;">
             Made with love, just for you.
         </p>
 
@@ -567,61 +729,199 @@ Here's to more stories, more laughter, more understanding, and more beautiful me
 
 <script>
 
-/* SCREEN CONTROL */
+/* SCREEN */
 
-function showScreen(screenId) {
+function showScreen(id) {
 
     document.querySelectorAll(".screen").forEach(screen => {
         screen.classList.remove("active");
     });
 
-    document.getElementById(screenId).classList.add("active");
+    document.getElementById(id).classList.add("active");
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
+}
+
+
+/* SOUND EFFECT */
+
+let audioContext;
+
+function playPop() {
+
+    try {
+
+        if (!audioContext) {
+            audioContext = new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+        }
+
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+
+        oscillator.type = "sine";
+
+        oscillator.frequency.setValueAtTime(
+            650,
+            audioContext.currentTime
+        );
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            420,
+            audioContext.currentTime + .09
+        );
+
+        gain.gain.setValueAtTime(
+            .0001,
+            audioContext.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .12,
+            audioContext.currentTime + .015
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .0001,
+            audioContext.currentTime + .13
+        );
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + .14);
+
+    } catch(e) {
+        console.log("Sound unavailable");
+    }
+
+}
+
+
+/* WIN SOUND */
+
+function playWin() {
+
+    try {
+
+        if (!audioContext) {
+            audioContext = new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+        }
+
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+
+        [523,659,784].forEach((frequency,index) => {
+
+            const oscillator = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+
+            const start = audioContext.currentTime + index*.13;
+
+            oscillator.type = "sine";
+            oscillator.frequency.value = frequency;
+
+            gain.gain.setValueAtTime(.0001,start);
+
+            gain.gain.exponentialRampToValueAtTime(
+                .10,start+.02
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,start+.25
+            );
+
+            oscillator.connect(gain);
+            gain.connect(audioContext.destination);
+
+            oscillator.start(start);
+            oscillator.stop(start+.27);
+
+        });
+
+    } catch(e) {
+        console.log("Sound unavailable");
+    }
+
+}
+
+
+/* MUSIC */
+
+const music = document.getElementById("backgroundMusic");
+
+music.volume = 0.45;
+
+function startMusic() {
+
+    music.play().catch(error => {
+        console.log("Music playback blocked", error);
+    });
+
+}
+
+function stopMusic() {
+
+    music.pause();
+    music.currentTime = 0;
+
 }
 
 
 /* GAME */
 
 let score = 0;
+
 const totalLetters = 5;
 
 function startGame() {
 
     score = 0;
 
-    document.getElementById("score").textContent = score;
+    document.getElementById("score").textContent = "0";
 
     showScreen("game");
 
     createLetters();
-}
 
+}
 
 function createLetters() {
 
     const area = document.getElementById("gameArea");
 
-    area.querySelectorAll(".letter").forEach(letter => {
+    area.querySelectorAll(".letter-pickup").forEach(letter => {
         letter.remove();
     });
 
     const positions = [
-        { left: "10%", top: "15%" },
-        { left: "70%", top: "20%" },
-        { left: "35%", top: "40%" },
-        { left: "80%", top: "55%" },
-        { left: "15%", top: "65%" }
+        {left:"10%",top:"15%"},
+        {left:"70%",top:"20%"},
+        {left:"35%",top:"40%"},
+        {left:"80%",top:"55%"},
+        {left:"15%",top:"65%"}
     ];
 
-    positions.forEach((position, index) => {
+    positions.forEach(position => {
 
         const letter = document.createElement("div");
 
-        letter.className = "letter";
+        letter.className = "letter-pickup";
         letter.textContent = "💌";
 
         letter.style.left = position.left;
@@ -629,13 +929,17 @@ function createLetters() {
 
         letter.onclick = function() {
 
-            if (letter.classList.contains("caught")) {
-                return;
-            }
+            if (letter.classList.contains("caught")) return;
 
             letter.classList.add("caught");
 
-            letter.style.display = "none";
+            playPop();
+
+            letter.style.transition = ".35s";
+            letter.style.transform = "scale(1.8) rotate(20deg)";
+            letter.style.opacity = "0";
+
+            setTimeout(() => letter.remove(),350);
 
             score++;
 
@@ -643,7 +947,10 @@ function createLetters() {
 
             if (score === totalLetters) {
 
-                setTimeout(finishGame, 500);
+                setTimeout(() => {
+                    playWin();
+                    finishGame();
+                },700);
 
             }
 
@@ -655,47 +962,112 @@ function createLetters() {
 
 }
 
-
 function finishGame() {
-
     showScreen("finish");
-
 }
 
 
-/* STORY FLOW */
+/* STORY */
 
 function goToStory() {
-
     showScreen("story");
-
 }
-
 
 function goToOpen() {
-
     showScreen("open");
-
 }
-
 
 function goToReading() {
-
     showScreen("reading");
-
 }
 
+
+/* LETTER + MUSIC + HEART RAIN */
 
 function openLetter() {
 
     showScreen("letter");
 
+    startMusic();
+
+    startHeartRain();
+
 }
 
+
+/* BONUS */
+
+function goToBonus() {
+
+    showScreen("bonus");
+
+    startHeartRain();
+
+}
+
+
+/* FINAL */
 
 function goToFinal() {
 
     showScreen("final");
+
+}
+
+
+/* HEART RAIN */
+
+let heartRainInterval = null;
+
+function createFallingHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "falling-heart";
+
+    const hearts = ["♡","💕","💗","💖","♥","💘"];
+
+    heart.textContent =
+        hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left =
+        Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+        (16 + Math.random()*22) + "px";
+
+    heart.style.animationDuration =
+        (3 + Math.random()*4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(),7000);
+
+}
+
+function startHeartRain() {
+
+    if (heartRainInterval) {
+        clearInterval(heartRainInterval);
+    }
+
+    createFallingHeart();
+
+    heartRainInterval = setInterval(() => {
+
+        const letterVisible =
+            document.getElementById("letter")
+            .classList.contains("active");
+
+        const bonusVisible =
+            document.getElementById("bonus")
+            .classList.contains("active");
+
+        if (letterVisible || bonusVisible) {
+            createFallingHeart();
+        }
+
+    },300);
 
 }
 
@@ -707,6 +1079,17 @@ function restartWebsite() {
     score = 0;
 
     document.getElementById("score").textContent = "0";
+
+    stopMusic();
+
+    if (heartRainInterval) {
+        clearInterval(heartRainInterval);
+        heartRainInterval = null;
+    }
+
+    document.querySelectorAll(".falling-heart").forEach(heart => {
+        heart.remove();
+    });
 
     showScreen("opening");
 
